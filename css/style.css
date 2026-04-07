@@ -1,0 +1,310 @@
+/* Main App Specific Styles */
+
+/* Header */
+.app-header {
+  padding: var(--spacing-6) var(--spacing-4);
+  text-align: center;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-2);
+}
+
+.app-desc {
+  font-size: 0.875rem;
+}
+
+/* Feature Sections */
+.feature-section {
+  display: none;
+  padding: var(--spacing-4);
+  flex-grow: 1;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.feature-section.active {
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 4 Cut Specifics */
+.theme-sakura {
+  background-image: linear-gradient(rgba(255, 252, 247, 0.8), rgba(255, 252, 247, 0.9)), url('https://images.unsplash.com/photo-1522383225653-ed111181a951?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+}
+
+.four-cut-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-6);
+  flex-grow: 1;
+}
+
+.four-cut-card {
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-polaroid);
+  padding: var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.four-cut-card:active {
+  transform: scale(0.95);
+}
+
+.theme-black { background-color: #383833; color: white !important; }
+.theme-red { background-color: #fc8585; color: #590711 !important;}
+.theme-white { background-color: #ffffff; border: 1px solid var(--sys-color-surface-container-highest); color: #383833 !important;}
+.theme-green { background-color: #abf4ac; color: #004a18 !important;}
+
+.four-cut-photo-slot {
+  aspect-ratio: 1;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px dashed rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-sm);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.theme-white .four-cut-photo-slot {
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+.upload-icon {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  opacity: 0.8;
+  z-index: 2;
+  text-align: center;
+}
+
+.four-cut-image {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 5;
+  display: none;
+}
+
+.four-cut-image.loaded {
+  display: block;
+}
+
+.four-cut-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+/* Container to be captured */
+.capture-container {
+  background-color: var(--sys-color-background);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-6);
+}
+
+.capture-title {
+  text-align: center;
+  margin-bottom: var(--spacing-4);
+  font-family: var(--font-display);
+  color: var(--sys-color-primary);
+  font-size: 1.25rem;
+}
+
+/* Bingo Specifics */
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-6);
+}
+
+.bingo-item {
+  aspect-ratio: 1;
+  background-color: var(--sys-color-surface-container);
+  border-radius: var(--radius-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--elevation-polaroid);
+  transition: background-color 0.2s ease;
+}
+
+.bingo-item.completed {
+  background-color: var(--sys-color-secondary-container);
+  color: var(--sys-color-on-secondary-container);
+}
+
+.bingo-title {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 2;
+  /* subtle text shadow for better readability over images */
+  text-shadow: 0 1px 3px rgba(255,255,255,0.8);
+}
+
+.bingo-image {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bingo-image.loaded {
+  opacity: 0.8; /* Slight fade to keep text readable */
+}
+.bingo-item.completed .bingo-title {
+  color: white;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+.bingo-item.completed .bingo-image.loaded {
+  opacity: 1;
+}
+
+/* Progress bar */
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background-color: var(--sys-color-surface-container-highest);
+  border-radius: var(--radius-full);
+  margin: var(--spacing-4) 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--sys-color-secondary);
+  transition: width 0.4s ease;
+}
+.progress-text {
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--sys-color-secondary);
+  font-weight: 600;
+  margin-bottom: var(--spacing-2);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(56, 56, 51, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Bottom sheet style */
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background-color: var(--sys-color-surface-container-lowest);
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--spacing-6);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 -12px 32px rgba(56, 56, 51, 0.1);
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  color: var(--sys-color-primary);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--sys-color-on-surface-variant);
+  padding: var(--spacing-2);
+}
+
+.modal-body {
+  margin-bottom: var(--spacing-6);
+  color: var(--sys-color-on-surface);
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+/* File Input Hack */
+.file-upload-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.file-upload-input {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.file-upload-btn {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+/* Action Container */
+.action-container {
+  margin-top: auto;
+  padding: var(--spacing-4) 0;
+  text-align: center;
+}
+
+.action-container .btn-primary {
+  width: 100%;
+}

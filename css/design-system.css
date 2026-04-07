@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+  /* Color Palette */
+  --sys-color-background: #fffcf7;
+  --sys-color-on-background: #383833;
+  
+  --sys-color-primary: #a74446;
+  --sys-color-on-primary: #ffffff;
+  --sys-color-primary-container: #fc8585;
+  
+  --sys-color-secondary: #2e7238;
+  --sys-color-secondary-container: #abf4ac;
+
+  --sys-color-surface: #fffcf7;
+  --sys-color-on-surface: #383833;
+  --sys-color-on-surface-variant: #65655e;
+  
+  --sys-color-surface-container-low: #fcf9f3;
+  --sys-color-surface-container: #f6f3ec;
+  --sys-color-surface-container-high: #f0eee6;
+  --sys-color-surface-container-highest: #eae8e0;
+  --sys-color-surface-container-lowest: #ffffff;
+  
+  --sys-color-outline-variant: #bbb9b2;
+
+  /* Typography */
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Be Vietnam Pro', sans-serif;
+
+  /* Elevation */
+  --elevation-ambient: 0 12px 32px -4px rgba(56, 56, 51, 0.06);
+  --elevation-polaroid: 0 4px 12px rgba(56, 56, 51, 0.04);
+  
+  /* Radii */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--sys-color-background);
+  color: var(--sys-color-on-background);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--sys-color-primary);
+  letter-spacing: -0.02em;
+}
+
+/* Utilities */
+.text-body {
+  color: var(--sys-color-on-surface-variant);
+  font-size: 1rem;
+}
+
+.text-title {
+  color: var(--sys-color-on-surface);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* Button Component */
+.btn-primary {
+  background: linear-gradient(135deg, var(--sys-color-primary) 0%, var(--sys-color-primary-container) 100%);
+  color: var(--sys-color-on-primary);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--elevation-ambient);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background-color: var(--sys-color-surface-container-highest);
+  color: var(--sys-color-on-surface);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Card / Container Component */
+.card-tactile {
+  background-color: var(--sys-color-surface-container-lowest);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--elevation-ambient);
+  padding: var(--spacing-6);
+  position: relative;
+}
+
+/* The Polaroid style */
+.polaroid-frame {
+  background-color: var(--sys-color-surface-container-lowest);
+  padding: var(--spacing-3);
+  padding-bottom: var(--spacing-12);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--elevation-polaroid);
+  border: 1px solid rgba(187, 185, 178, 0.15); /* Ghost Border */
+}
+
+/* Layout Utilities */
+.container {
+  width: 100%;
+  max-width: 480px; /* Mobile optimal width */
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Glassmorphism Navigation */
+.nav-glass {
+  background-color: rgba(255, 252, 247, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: var(--spacing-4);
+  display: flex;
+  justify-content: space-around;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.nav-item {
+  color: var(--sys-color-on-surface-variant);
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-decoration: none;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+}
+
+.nav-item.active {
+  color: var(--sys-color-primary);
+  background-color: var(--sys-color-surface-container);
+}

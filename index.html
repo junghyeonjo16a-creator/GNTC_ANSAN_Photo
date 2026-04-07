@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gospel & Fruits Bingo</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- html2canvas for saving as image -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Navigation (Sticky Glass Header) -->
+    <nav class="nav-glass">
+      <a href="#" class="nav-item active" id="tab-4cut">복음 네컷</a>
+      <a href="#" class="nav-item" id="tab-bingo">열매 인증</a>
+    </nav>
+
+    <!-- App Header -->
+    <header class="app-header">
+      <h1 class="app-title" id="page-title">복음 네컷</h1>
+      <p class="app-desc" id="page-desc">네 가지 색으로 담아내는 나의 복음 이야기</p>
+    </header>
+
+    <!-- SECTION 1: Gospel 4 Cut -->
+    <section id="section-4cut" class="feature-section active">
+      <div class="capture-container theme-sakura" id="capture-4cut">
+        <h2 class="capture-title">Gospel 4-Cut</h2>
+        <div class="four-cut-grid">
+          <!-- Item 1: Black (Sin) -->
+          <div class="four-cut-card theme-black" data-color="black" data-index="0">
+            <div class="four-cut-photo-slot">
+              <span class="upload-icon">📷<br>사진 올리기</span>
+              <img src="" alt="" class="four-cut-image" id="fc-img-0">
+            </div>
+            <div class="four-cut-label">01. THE PROBLEM : SIN</div>
+          </div>
+          <!-- Item 2: Red (Blood) -->
+          <div class="four-cut-card theme-red" data-color="red" data-index="1">
+            <div class="four-cut-photo-slot">
+              <span class="upload-icon">📷<br>사진 올리기</span>
+              <img src="" alt="" class="four-cut-image" id="fc-img-1">
+            </div>
+            <div class="four-cut-label">02. THE SOLUTION : BLOOD</div>
+          </div>
+          <!-- Item 3: White (Purity) -->
+          <div class="four-cut-card theme-white" data-color="white" data-index="2">
+            <div class="four-cut-photo-slot">
+              <span class="upload-icon">📷<br>사진 올리기</span>
+              <img src="" alt="" class="four-cut-image" id="fc-img-2">
+            </div>
+            <div class="four-cut-label">03. THE RESULT : PURITY</div>
+          </div>
+          <!-- Item 4: Green (Growth) -->
+          <div class="four-cut-card theme-green" data-color="green" data-index="3">
+            <div class="four-cut-photo-slot">
+              <span class="upload-icon">📷<br>사진 올리기</span>
+              <img src="" alt="" class="four-cut-image" id="fc-img-3">
+            </div>
+            <div class="four-cut-label">04. THE JOURNEY : GROWTH</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="action-container">
+        <button class="btn-primary" id="btn-save-4cut">이미지 저장하기</button>
+      </div>
+    </section>
+
+    <!-- SECTION 2: 9 Fruits Bingo -->
+    <section id="section-bingo" class="feature-section">
+      <div class="capture-container polaroid-frame" id="capture-bingo">
+        <h2 class="capture-title">성령의 열매 보드</h2>
+        
+        <div class="progress-text">성장률: <span id="bingo-progress-text">0%</span></div>
+        <div class="progress-container">
+          <div class="progress-bar" id="bingo-progress-bar"></div>
+        </div>
+
+        <div class="bingo-grid" id="bingo-grid">
+          <!-- JS will populate these 9 cells -->
+        </div>
+        
+        <div style="margin-top:20px; font-weight:600; text-align:center; color: var(--sys-color-on-surface-variant); font-size: 0.85rem">
+          나만의 열매 기록장
+        </div>
+      </div>
+
+      <div class="action-container">
+        <button class="btn-primary" id="btn-save-bingo">프레임 저장하기</button>
+      </div>
+    </section>
+
+    <!-- Reusable Modal (Bottom Sheet Style) -->
+    <div class="modal-overlay" id="app-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-title">제목</h3>
+          <button class="modal-close" id="modal-close">&times;</button>
+        </div>
+        <div class="modal-body text-body" id="modal-body">
+          여기에 성경적 의미나 설명이 들어갑니다. (나중에 직접 수정 가능)
+        </div>
+        <div class="modal-actions">
+          <div class="file-upload-wrapper">
+            <input type="file" accept="image/*" class="file-upload-input" id="modal-file-input">
+            <button class="btn-secondary file-upload-btn">사진 추가하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- end container -->
+
+  <script src="js/app.js"></script>
+</body>
+</html>
