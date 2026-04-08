@@ -34,12 +34,6 @@
 }
 
 /* 4 Cut Specifics */
-.theme-sakura {
-  background-image: linear-gradient(rgba(255, 252, 247, 0.8), rgba(255, 252, 247, 0.9)), url('https://images.unsplash.com/photo-1522383225653-ed111181a951?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
-  background-size: cover;
-  background-position: center;
-}
-
 .four-cut-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -115,10 +109,38 @@
 
 /* Container to be captured */
 .capture-container {
-  background-color: var(--sys-color-background);
+  background-color: rgba(255, 252, 247, 0.5); /* translucent to show cherry blossom */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: var(--spacing-4);
   border-radius: var(--radius-lg);
   margin-bottom: var(--spacing-6);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+/* Dynamic Frames for Saving */
+.frame-gntc-white {
+  background-color: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+.frame-gntc-white .gntc-logo-container {
+  display: block !important;
+}
+.frame-gntc-white .capture-title {
+  display: none !important;
+}
+
+.frame-sakura-bg {
+  background-image: linear-gradient(rgba(255, 252, 247, 0.8), rgba(255, 252, 247, 0.9)), url('https://images.unsplash.com/photo-1522383225653-ed111181a951?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
 }
 
 .capture-title {
@@ -270,6 +292,7 @@
   margin-bottom: var(--spacing-6);
   color: var(--sys-color-on-surface);
   line-height: 1.6;
+  white-space: pre-wrap;
 }
 
 .modal-actions {

@@ -27,8 +27,11 @@
 
     <!-- SECTION 1: Gospel 4 Cut -->
     <section id="section-4cut" class="feature-section active">
-      <div class="capture-container theme-sakura" id="capture-4cut">
-        <h2 class="capture-title">Gospel 4-Cut</h2>
+      <div class="capture-container" id="capture-4cut">
+        <div class="gntc-logo-container" style="display: none; text-align: center; margin-bottom: 16px;">
+          <img src="img/gntc-logo.png" alt="GNTC Logo" style="height: 50px;">
+        </div>
+        <h2 class="capture-title">GNTC 복음네컷</h2>
         <div class="four-cut-grid">
           <!-- Item 1: Black (Sin) -->
           <div class="four-cut-card theme-black" data-color="black" data-index="0">
@@ -36,7 +39,7 @@
               <span class="upload-icon">📷<br>사진 올리기</span>
               <img src="" alt="" class="four-cut-image" id="fc-img-0">
             </div>
-            <div class="four-cut-label">01. THE PROBLEM : SIN</div>
+            <div class="four-cut-label">검정색</div>
           </div>
           <!-- Item 2: Red (Blood) -->
           <div class="four-cut-card theme-red" data-color="red" data-index="1">
@@ -44,7 +47,7 @@
               <span class="upload-icon">📷<br>사진 올리기</span>
               <img src="" alt="" class="four-cut-image" id="fc-img-1">
             </div>
-            <div class="four-cut-label">02. THE SOLUTION : BLOOD</div>
+            <div class="four-cut-label">빨간색</div>
           </div>
           <!-- Item 3: White (Purity) -->
           <div class="four-cut-card theme-white" data-color="white" data-index="2">
@@ -52,7 +55,7 @@
               <span class="upload-icon">📷<br>사진 올리기</span>
               <img src="" alt="" class="four-cut-image" id="fc-img-2">
             </div>
-            <div class="four-cut-label">03. THE RESULT : PURITY</div>
+            <div class="four-cut-label">하양색</div>
           </div>
           <!-- Item 4: Green (Growth) -->
           <div class="four-cut-card theme-green" data-color="green" data-index="3">
@@ -60,13 +63,13 @@
               <span class="upload-icon">📷<br>사진 올리기</span>
               <img src="" alt="" class="four-cut-image" id="fc-img-3">
             </div>
-            <div class="four-cut-label">04. THE JOURNEY : GROWTH</div>
+            <div class="four-cut-label">초록색</div>
           </div>
         </div>
       </div>
       
       <div class="action-container">
-        <button class="btn-primary" id="btn-save-4cut">이미지 저장하기</button>
+        <button class="btn-primary" id="btn-save-4cut">사진 저장하기</button>
       </div>
     </section>
 
@@ -101,10 +104,13 @@
           <h3 class="modal-title" id="modal-title">제목</h3>
           <button class="modal-close" id="modal-close">&times;</button>
         </div>
-        <div class="modal-body text-body" id="modal-body">
-          여기에 성경적 의미나 설명이 들어갑니다. (나중에 직접 수정 가능)
+        <div class="modal-body text-body">
+          <img id="modal-image" src="" alt="의미 설명 이미지" style="width: 100%; border-radius: 8px; display: none; margin-bottom: 16px;">
+          <div id="modal-body">
+            여기에 성경적 의미나 설명이 들어갑니다. (나중에 직접 수정 가능)
+          </div>
         </div>
-        <div class="modal-actions">
+        <div class="modal-actions" id="modal-actions">
           <div class="file-upload-wrapper">
             <input type="file" accept="image/*" class="file-upload-input" id="modal-file-input">
             <button class="btn-secondary file-upload-btn">사진 추가하기</button>
