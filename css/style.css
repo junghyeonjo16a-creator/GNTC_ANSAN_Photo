@@ -120,6 +120,26 @@
 }
 
 /* Dynamic Frames for Saving */
+.is-preview .four-cut-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border: none !important;
+}
+.is-preview .four-cut-label {
+  display: none !important;
+}
+.is-preview .four-cut-photo-slot {
+  border: none !important;
+  background-color: #fff !important;
+}
+.is-preview .four-cut-image {
+  border-radius: var(--radius-sm);
+}
+.is-preview .upload-icon {
+  display: none;
+}
+
 .frame-gntc-white {
   background-color: #ffffff !important;
   backdrop-filter: none !important;
@@ -128,7 +148,7 @@
   border-radius: 0 !important;
 }
 .frame-gntc-white .gntc-logo-container {
-  display: block !important;
+  display: flex !important;
 }
 .frame-gntc-white .capture-title {
   display: none !important;
@@ -141,6 +161,18 @@
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: none !important;
+}
+
+/* Frame Selection Swatches */
+.frame-swatch {
+  cursor: pointer;
+  transition: transform 0.2s, outline 0.2s;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.frame-swatch.active {
+  outline: 2px solid var(--sys-color-primary);
+  transform: scale(1.1);
 }
 
 .capture-title {
@@ -259,9 +291,22 @@
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   padding: var(--spacing-6);
   transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.3s ease, color 0.3s ease;
   box-shadow: 0 -12px 32px rgba(56, 56, 51, 0.1);
 }
+
+/* Modal Themed Colors */
+.modal-content.theme-black { background-color: #383833; color: white; }
+.modal-content.theme-black .modal-title, .modal-content.theme-black .modal-body, .modal-content.theme-black .modal-close { color: white; }
+
+.modal-content.theme-red { background-color: #fbd6d6; color: #590711; }
+.modal-content.theme-red .modal-title, .modal-content.theme-red .modal-body, .modal-content.theme-red .modal-close { color: #590711; }
+
+.modal-content.theme-green { background-color: #ddf7de; color: #004a18; }
+.modal-content.theme-green .modal-title, .modal-content.theme-green .modal-body, .modal-content.theme-green .modal-close { color: #004a18; }
+
+.modal-content.theme-white { background-color: #ffffff; color: #383833; border: 1px solid var(--sys-color-surface-container-highest); }
+.modal-content.theme-white .modal-title, .modal-content.theme-white .modal-body, .modal-content.theme-white .modal-close { color: #383833; }
 
 .modal-overlay.active .modal-content {
   transform: translateY(0);

@@ -131,62 +131,15 @@ document.addEventListener('DOMContentLoaded', () => {
     modalTitle.textContent = context.title;
     modalBody.textContent = context.desc;
     
-    // Setup modal contents based on type
-    if (context.type === 'frame-select') {
-      // Hide normal file upload buttons
-      document.getElementById('modal-actions').style.display = 'none';
-      
-      // Inject frame selection buttons into body
-      modalBody.innerHTML = `
-        <div style="display:flex; flex-direction:column; gap:8px;">
-          <button class="btn-primary" id="select-frame-gntc" style="width:100%; border-radius:8px;">GNTC (흰바탕 로고)</button>
-          <button class="btn-secondary" id="select-frame-sakura" style="width:100%; border-radius:8px; background-color:var(--sys-color-primary-container); color:white;">벚꽃 프레임</button>
-          <button class="btn-secondary" id="select-frame-basic" style="width:100%; border-radius:8px;">기본 프레임 (투명)</button>
-        </div>
-      `;
-      modalImage.style.display = 'none';
-      modalBody.style.display = 'block';
-
-      // Event listeners for frame selection
-      const captureEl = document.getElementById('capture-4cut');
-      
-      const doCapture = (frameClass) => {
-        closeModal();
-        if(frameClass) captureEl.classList.add(frameClass);
-        
-        // slight delay to allow CSS transition/render
-        setTimeout(() => {
-          html2canvas(captureEl, {
-            scale: 2,
-            useCORS: true,
-            backgroundColor: null
-          }).then(canvas => {
-            if(frameClass) captureEl.classList.remove(frameClass);
-            const link = document.createElement('a');
-            link.download = 'gospel-4cut.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-          });
-        }, 100);
-      };
-
-      document.getElementById('select-frame-gntc').onclick = () => doCapture('frame-gntc-white');
-      document.getElementById('select-frame-sakura').onclick = () => doCapture('frame-sakura-bg');
-      document.getElementById('select-frame-basic').onclick = () => doCapture('');
-
-    } else {
-      document.getElementById('modal-actions').style.display = 'flex';
-      
-      if (context.image) {
-        modalImage.src = context.image;
-        modalImage.style.display = 'block';
-        modalBody.style.display = 'none'; // text hidden
-      } else {
-        modalImage.style.display = 'none';
-        modalBody.innerText = context.desc;
-        modalBody.style.display = 'block';
-      }
+    // Set theme class if provided
+    const contentEl = document.querySelector('.modal-content');
+    contentEl.className = 'modal-content'; // reset
+    if (context.colorClass) {
+      contentEl.classList.add(context.colorClass);
     }
+    
+    document.getElementById('modal-actions').style.display = 'flex';
+    modalBody.style.display = 'block';
     
     // Reset file input so same file can trigger change event again
     fileInput.value = '';
@@ -196,7 +149,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function closeModal() {
     modal.classList.remove('active');
-    currentSelectionContext = null;
+    // Clear the theme after transition
+    setTimeout(() => {
+      const contentEl = document.querySelector('.modal-content');
+      if(contentEl) contentEl.className = 'modal-content';
+    }, 300);
   }
 
   modalClose.addEventListener('click', closeModal);
@@ -252,14 +209,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 6. html2canvas Download Logic
   function downloadInnerElement(elementId, filename) {
-    const captureEl = document.getElementById(elementId);
-    if (!captureEl) return;
+    const el = document.getElementById(elementId);
+    if (!el) return;
     
-    // HTML2Canvas bug where external images might fail without proxy/CORS. We assume the image loads fine here.
-    html2canvas(captureEl, {
-      scale: 2, // better quality
+    html2canvas(el, {
+      scale: 2,
       useCORS: true,
-      backgroundColor: null // allow CSS background image (theme-sakura) to be captured
+      backgroundColor: null
     }).then(canvas => {
       const link = document.createElement('a');
       link.download = filename;
@@ -268,16 +224,87 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  document.getElementById('btn-save-4cut').addEventListener('click', () => {
-    openModal({
-      type: 'frame-select',
-      title: '사진 저장하기',
-      desc: ''
-    });
-  });
+  // 7. Frame Selection & Save Logic
+  const btnStartSave = document.getElementById('btn-start-save');
+  const btnFinalSave = document.getElementById('btn-final-save');
+  const btnCancelSave = document.getElementById('btn-cancel-save');
+  
+  const initialAction = document.getElementById('initial-save-action');
+  const toolbar = document.getElementById('frame-selection-toolbar');
+  const capture4CutEl = document.getElementById('capture-4cut');
+  
+  const swatches = {
+    gntc: { el: document.getElementById('swatch-gntc'), class: 'frame-gntc-white' },
+    sakura: { el: document.getElementById('swatch-sakura'), class: 'frame-sakura-bg' }
+  };
+  
+  let currentPreviewClass = 'frame-sakura-bg'; // Default
 
-  document.getElementById('btn-save-bingo').addEventListener('click', () => {
-    downloadInnerElement('capture-bingo', 'fruits-bingo.png');
-  });
+  if (btnStartSave) {
+    btnStartSave.addEventListener('click', () => {
+      initialAction.style.display = 'none';
+      toolbar.style.display = 'flex';
+      capture4CutEl.classList.add('is-preview');
+      // Ensure default preview is active
+      applyPreview('sakura');
+    });
+  }
+
+  if (btnCancelSave) {
+    btnCancelSave.addEventListener('click', () => {
+      toolbar.style.display = 'none';
+      initialAction.style.display = 'block';
+      // reset captureEl
+      capture4CutEl.className = 'capture-container';
+    });
+  }
+
+  function applyPreview(swatchKey) {
+    // Reset selections
+    Object.values(swatches).forEach(sw => sw.el.classList.remove('active'));
+    swatches[swatchKey].el.classList.add('active');
+    
+    // Apply class to target. preserve is-preview
+    capture4CutEl.className = 'capture-container is-preview ' + swatches[swatchKey].class;
+    currentPreviewClass = swatches[swatchKey].class;
+  }
+
+  // Bind Swatches
+  if (swatches.gntc.el) swatches.gntc.el.addEventListener('click', () => applyPreview('gntc'));
+  if (swatches.sakura.el) swatches.sakura.el.addEventListener('click', () => applyPreview('sakura'));
+
+  // Final Save
+  if (btnFinalSave) {
+    btnFinalSave.addEventListener('click', () => {
+      const originalText = btnFinalSave.innerText;
+      btnFinalSave.innerText = "저장 중...";
+      btnFinalSave.disabled = true;
+
+      html2canvas(capture4CutEl, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: null
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'gospel-4cut.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        
+        btnFinalSave.innerText = originalText;
+        btnFinalSave.disabled = false;
+        
+        // Auto close toolbar
+        btnCancelSave.click();
+      });
+    });
+  }
+
+  // Bingo Save
+  const btnSaveBingo = document.getElementById('btn-save-bingo');
+  if (btnSaveBingo) {
+    btnSaveBingo.addEventListener('click', () => {
+      downloadInnerElement('capture-bingo', 'fruits-bingo.png');
+    });
+  }
 
 });

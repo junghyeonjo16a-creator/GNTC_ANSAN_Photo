@@ -28,10 +28,6 @@
     <!-- SECTION 1: Gospel 4 Cut -->
     <section id="section-4cut" class="feature-section active">
       <div class="capture-container" id="capture-4cut">
-        <div class="gntc-logo-container" style="display: none; text-align: center; margin-bottom: 16px;">
-          <img src="img/gntc-logo.png" alt="GNTC Logo" style="height: 50px;">
-        </div>
-        <h2 class="capture-title">GNTC 복음네컷</h2>
         <div class="four-cut-grid">
           <!-- Item 1: Black (Sin) -->
           <div class="four-cut-card theme-black" data-color="black" data-index="0">
@@ -66,10 +62,32 @@
             <div class="four-cut-label">초록색</div>
           </div>
         </div>
+
+        <!-- GNTC Logo (Always visible in all frames at the bottom) -->
+        <div class="gntc-logo-container" style="display: flex; justify-content: center; margin-top: 24px; padding-bottom: 8px;">
+          <img src="img/gntc-logo.png" alt="GNTC 실제 로고" style="height: 48px; object-fit: contain;">
+        </div>
       </div>
       
-      <div class="action-container">
-        <button class="btn-primary" id="btn-save-4cut">사진 저장하기</button>
+      <div class="action-container" id="initial-save-action">
+        <button class="btn-primary" id="btn-start-save">사진 저장하기</button>
+      </div>
+
+      <!-- Frame Selection Toolbar (Hidden initially) -->
+      <div class="frame-selection-toolbar" id="frame-selection-toolbar" style="display: none; flex-direction: column; align-items: center; gap: 16px; margin-top: var(--spacing-4);">
+        <p style="margin:0; font-size: 0.95rem; font-weight:600; color: var(--sys-color-primary);">저장할 프레임을 선택해주세요</p>
+        <div style="display: flex; gap: 20px; justify-content: center; align-items: center;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+            <button class="frame-swatch" id="swatch-gntc" style="background: white; border: 2px solid #ccc; width:44px; height:44px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></button>
+            <span style="font-size:0.75rem; color:var(--sys-color-on-background);">GNTC 로고</span>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+            <button class="frame-swatch active" id="swatch-sakura" style="background: linear-gradient(135deg, #fbd6d6, #fab6b6); border: 2px solid #fff; width:48px; height:48px; border-radius:50%; box-shadow:0 4px 8px rgba(0,0,0,0.15);"></button>
+            <span style="font-size:0.75rem; color:var(--sys-color-on-background); font-weight:bold;">벚꽃 배경</span>
+          </div>
+        </div>
+        <button class="btn-primary" id="btn-final-save" style="width:100%; margin-top:8px;">이 프레임으로 최종 저장</button>
+        <button class="btn-secondary" id="btn-cancel-save" style="width:100%; margin-top:-8px; background:transparent; border:none; color:var(--sys-color-on-surface-variant);">취소하기</button>
       </div>
     </section>
 
