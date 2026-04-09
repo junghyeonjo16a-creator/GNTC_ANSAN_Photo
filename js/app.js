@@ -102,6 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const fourCutItems = document.querySelectorAll('.four-cut-card');
   fourCutItems.forEach(item => {
     item.addEventListener('click', () => {
+      // Prevent modal opening / photo interaction during save preview
+      if (document.getElementById('capture-4cut').classList.contains('is-preview')) {
+        return;
+      }
+      
       const idx = item.dataset.index;
       const col = item.dataset.color;
       
@@ -233,9 +238,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const toolbar = document.getElementById('frame-selection-toolbar');
   const capture4CutEl = document.getElementById('capture-4cut');
   
+  const layoutBtns = {
+    grid: { el: document.getElementById('layout-grid'), class: 'layout-grid-2x2' },
+    staggered: { el: document.getElementById('layout-staggered'), class: 'layout-staggered' },
+    vertical: { el: document.getElementById('layout-vertical'), class: 'layout-vertical' }
+  };
+  let currentLayoutClass = 'layout-grid-2x2';
+
   const swatches = {
     gntc: { el: document.getElementById('swatch-gntc'), class: 'frame-gntc-white' },
-    sakura: { el: document.getElementById('swatch-sakura'), class: 'frame-sakura-bg' }
+    sakura: { el: document.getElementById('swatch-sakura'), class: 'frame-sakura-bg' },
+    yellow: { el: document.getElementById('swatch-yellow'), class: 'frame-yellow-bg' },
+    skyblue: { el: document.getElementById('swatch-skyblue'), class: 'frame-skyblue-bg' }
   };
   
   let currentPreviewClass = 'frame-sakura-bg'; // Default
@@ -254,24 +268,50 @@ document.addEventListener('DOMContentLoaded', () => {
     btnCancelSave.addEventListener('click', () => {
       toolbar.style.display = 'none';
       initialAction.style.display = 'block';
-      // reset captureEl
-      capture4CutEl.className = 'capture-container';
+      // reset captureEl but preserve layout
+      capture4CutEl.className = 'capture-container ' + currentLayoutClass;
     });
   }
 
+  function applyLayout(layoutKey) {
+    Object.values(layoutBtns).forEach(btn => {
+      if(!btn.el) return;
+      btn.el.style.background = 'white';
+      btn.el.style.color = '#555';
+      btn.el.style.borderColor = '#ccc';
+    });
+    if(layoutBtns[layoutKey].el) {
+      layoutBtns[layoutKey].el.style.background = 'var(--sys-color-primary)';
+      layoutBtns[layoutKey].el.style.color = 'white';
+      layoutBtns[layoutKey].el.style.borderColor = 'var(--sys-color-primary)';
+    }
+    
+    capture4CutEl.classList.remove(currentLayoutClass);
+    capture4CutEl.classList.add(layoutBtns[layoutKey].class);
+    currentLayoutClass = layoutBtns[layoutKey].class;
+  }
+
+  if (layoutBtns.grid.el) layoutBtns.grid.el.addEventListener('click', () => applyLayout('grid'));
+  if (layoutBtns.staggered.el) layoutBtns.staggered.el.addEventListener('click', () => applyLayout('staggered'));
+  if (layoutBtns.vertical.el) layoutBtns.vertical.el.addEventListener('click', () => applyLayout('vertical'));
+
   function applyPreview(swatchKey) {
     // Reset selections
-    Object.values(swatches).forEach(sw => sw.el.classList.remove('active'));
-    swatches[swatchKey].el.classList.add('active');
+    Object.values(swatches).forEach(sw => {
+      if(sw.el) sw.el.classList.remove('active');
+    });
+    if(swatches[swatchKey].el) swatches[swatchKey].el.classList.add('active');
     
-    // Apply class to target. preserve is-preview
-    capture4CutEl.className = 'capture-container is-preview ' + swatches[swatchKey].class;
+    // Apply class to target. preserve is-preview and currentLayoutClass
+    capture4CutEl.className = 'capture-container is-preview ' + currentLayoutClass + ' ' + swatches[swatchKey].class;
     currentPreviewClass = swatches[swatchKey].class;
   }
 
   // Bind Swatches
   if (swatches.gntc.el) swatches.gntc.el.addEventListener('click', () => applyPreview('gntc'));
   if (swatches.sakura.el) swatches.sakura.el.addEventListener('click', () => applyPreview('sakura'));
+  if (swatches.yellow.el) swatches.yellow.el.addEventListener('click', () => applyPreview('yellow'));
+  if (swatches.skyblue.el) swatches.skyblue.el.addEventListener('click', () => applyPreview('skyblue'));
 
   // Final Save
   if (btnFinalSave) {

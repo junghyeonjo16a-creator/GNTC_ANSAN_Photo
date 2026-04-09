@@ -27,7 +27,7 @@
 
     <!-- SECTION 1: Gospel 4 Cut -->
     <section id="section-4cut" class="feature-section active">
-      <div class="capture-container" id="capture-4cut">
+      <div class="capture-container layout-grid-2x2" id="capture-4cut">
         <div class="four-cut-grid">
           <!-- Item 1: Black (Sin) -->
           <div class="four-cut-card theme-black" data-color="black" data-index="0">
@@ -74,18 +74,41 @@
       </div>
 
       <!-- Frame Selection Toolbar (Hidden initially) -->
-      <div class="frame-selection-toolbar" id="frame-selection-toolbar" style="display: none; flex-direction: column; align-items: center; gap: 16px; margin-top: var(--spacing-4);">
-        <p style="margin:0; font-size: 0.95rem; font-weight:600; color: var(--sys-color-primary);">저장할 프레임을 선택해주세요</p>
-        <div style="display: flex; gap: 20px; justify-content: center; align-items: center;">
-          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-            <button class="frame-swatch" id="swatch-gntc" style="background: white; border: 2px solid #ccc; width:44px; height:44px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></button>
-            <span style="font-size:0.75rem; color:var(--sys-color-on-background);">GNTC 로고</span>
-          </div>
-          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-            <button class="frame-swatch active" id="swatch-sakura" style="background: linear-gradient(135deg, #fbd6d6, #fab6b6); border: 2px solid #fff; width:48px; height:48px; border-radius:50%; box-shadow:0 4px 8px rgba(0,0,0,0.15);"></button>
-            <span style="font-size:0.75rem; color:var(--sys-color-on-background); font-weight:bold;">벚꽃 배경</span>
+      <div class="frame-selection-toolbar" id="frame-selection-toolbar" style="display: none; flex-direction: column; align-items: center; gap: 24px; margin-top: var(--spacing-5);">
+        
+        <!-- 1. Layout Selection -->
+        <div style="width: 100%; text-align: center;">
+          <p style="margin:0 0 12px 0; font-size: 0.95rem; font-weight:600; color: var(--sys-color-primary);">1. 사진 배치 선택</p>
+          <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
+            <button class="layout-btn active" id="layout-grid" style="padding: 8px 16px; border-radius: 20px; border: 1px solid var(--sys-color-primary); background: var(--sys-color-primary); color: white; font-weight: bold; font-size: 0.85rem; cursor:pointer;">2x2 격자</button>
+            <button class="layout-btn" id="layout-staggered" style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; color: #555; font-size: 0.85rem; cursor:pointer;">지그재그</button>
+            <button class="layout-btn" id="layout-vertical" style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; color: #555; font-size: 0.85rem; cursor:pointer;">세로형</button>
           </div>
         </div>
+
+        <!-- 2. Color Selection -->
+        <div style="width: 100%; text-align: center;">
+          <p style="margin:0 0 12px 0; font-size: 0.95rem; font-weight:600; color: var(--sys-color-primary);">2. 프레임 테마 선택</p>
+          <div style="display: flex; gap: 16px; justify-content: center; align-items: flex-end; flex-wrap: wrap;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <button class="frame-swatch" id="swatch-gntc" style="background: white; border: 2px solid #ccc; width:44px; height:44px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></button>
+              <span style="font-size:0.75rem; color:var(--sys-color-on-background);">GNTC(흰)</span>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <button class="frame-swatch active" id="swatch-sakura" style="background: linear-gradient(135deg, #fbd6d6, #fab6b6); border: 2px solid #fff; width:48px; height:48px; border-radius:50%; box-shadow:0 4px 8px rgba(0,0,0,0.15);"></button>
+              <span style="font-size:0.75rem; color:var(--sys-color-on-background); font-weight:bold;">벚꽃</span>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <button class="frame-swatch" id="swatch-yellow" style="background: linear-gradient(135deg, #fff9c4, #fff176); border: 2px solid #fff; width:44px; height:44px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></button>
+              <span style="font-size:0.75rem; color:var(--sys-color-on-background);">노랑</span>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <button class="frame-swatch" id="swatch-skyblue" style="background: linear-gradient(135deg, #e1f5fe, #81d4fa); border: 2px solid #fff; width:44px; height:44px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></button>
+              <span style="font-size:0.75rem; color:var(--sys-color-on-background);">하늘</span>
+            </div>
+          </div>
+        </div>
+
         <button class="btn-primary" id="btn-final-save" style="width:100%; margin-top:8px;">이 프레임으로 최종 저장</button>
         <button class="btn-secondary" id="btn-cancel-save" style="width:100%; margin-top:-8px; background:transparent; border:none; color:var(--sys-color-on-surface-variant);">취소하기</button>
       </div>

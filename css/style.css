@@ -36,10 +36,32 @@
 /* 4 Cut Specifics */
 .four-cut-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: var(--spacing-3);
   margin-bottom: var(--spacing-6);
   flex-grow: 1;
+}
+
+/* 1. 2x2 Grid Layout */
+.layout-grid-2x2 .four-cut-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* 2. Staggered Layout */
+.layout-staggered .four-cut-grid {
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: calc(var(--spacing-6) + 40px); /* Extra space for staggered items */
+}
+.layout-staggered .four-cut-card:nth-child(2),
+.layout-staggered .four-cut-card:nth-child(4) {
+  transform: translateY(40px);
+}
+
+/* 3. Vertical Layout */
+.layout-vertical .four-cut-grid {
+  grid-template-columns: 1fr;
+  max-width: 220px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .four-cut-card {
@@ -63,7 +85,8 @@
 .theme-green { background-color: #abf4ac; color: #004a18 !important;}
 
 .four-cut-photo-slot {
-  aspect-ratio: 1;
+  aspect-ratio: 4/5;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px dashed rgba(255, 255, 255, 0.5);
   border-radius: var(--radius-sm);
@@ -90,6 +113,7 @@
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   object-fit: cover;
+  object-position: center;
   z-index: 5;
   display: none;
 }
@@ -120,6 +144,14 @@
 }
 
 /* Dynamic Frames for Saving */
+.capture-container.is-preview {
+  padding-bottom: var(--spacing-2);
+}
+.is-preview .gntc-logo-container {
+  margin-top: 12px !important;
+  padding-bottom: 4px !important;
+}
+
 .is-preview .four-cut-card {
   background: transparent !important;
   box-shadow: none !important;
@@ -140,6 +172,11 @@
   display: none;
 }
 
+/* Fix staggered logic during preview because removing padding changes height dimensions slightly if not careful */
+.is-preview.layout-staggered .four-cut-grid {
+  gap: var(--spacing-2);
+}
+
 .frame-gntc-white {
   background-color: #ffffff !important;
   backdrop-filter: none !important;
@@ -158,6 +195,20 @@
   background-image: linear-gradient(rgba(255, 252, 247, 0.8), rgba(255, 252, 247, 0.9)), url('https://images.unsplash.com/photo-1522383225653-ed111181a951?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') !important;
   background-size: cover !important;
   background-position: center !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+}
+
+.frame-yellow-bg {
+  background-color: #fff9c4 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+}
+
+.frame-skyblue-bg {
+  background-color: #e1f5fe !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: none !important;
