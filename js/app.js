@@ -44,6 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // 1. Navigation
+  const btnShowDesc = document.getElementById('btn-show-desc');
+  if (btnShowDesc) {
+    btnShowDesc.addEventListener('click', () => {
+      openModal({
+        type: 'info',
+        title: '프로그램 안내',
+        desc: '해당 프로그램의 설명입니다. (추후 내용 업데이트 예정)'
+      });
+    });
+  }
+
   tab4Cut.addEventListener('click', (e) => {
     e.preventDefault();
     tab4Cut.classList.add('active');
@@ -99,11 +110,30 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 3. 4-Cut Clicks
+  let selectedSwapNode = null;
   const fourCutItems = document.querySelectorAll('.four-cut-card');
   fourCutItems.forEach(item => {
     item.addEventListener('click', () => {
-      // Prevent modal opening / photo interaction during save preview
+      // Photo interaction during save preview (Swap Logic)
       if (document.getElementById('capture-4cut').classList.contains('is-preview')) {
+        if (!selectedSwapNode) {
+          selectedSwapNode = item;
+          item.classList.add('selected-for-swap');
+        } else if (selectedSwapNode === item) {
+          selectedSwapNode.classList.remove('selected-for-swap');
+          selectedSwapNode = null;
+        } else {
+          // Perform DOM Swap using placeholders
+          selectedSwapNode.classList.remove('selected-for-swap');
+          const parent = item.parentNode;
+          const p1 = document.createElement('div');
+          const p2 = document.createElement('div');
+          parent.insertBefore(p1, item);
+          parent.insertBefore(p2, selectedSwapNode);
+          parent.replaceChild(selectedSwapNode, p1);
+          parent.replaceChild(item, p2);
+          selectedSwapNode = null;
+        }
         return;
       }
       
@@ -238,6 +268,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const toolbar = document.getElementById('frame-selection-toolbar');
   const capture4CutEl = document.getElementById('capture-4cut');
   
+  let originalDomOrder = [];
+
+  function restoreOriginalOrder() {
+    if (originalDomOrder.length > 0) {
+      const grid = document.querySelector('.four-cut-grid');
+      originalDomOrder.forEach(node => grid.appendChild(node));
+    }
+    if (selectedSwapNode) {
+      selectedSwapNode.classList.remove('selected-for-swap');
+      selectedSwapNode = null;
+    }
+  }
+
   const layoutBtns = {
     grid: { el: document.getElementById('layout-grid'), class: 'layout-grid-2x2' },
     staggered: { el: document.getElementById('layout-staggered'), class: 'layout-staggered' },
@@ -259,6 +302,11 @@ document.addEventListener('DOMContentLoaded', () => {
       initialAction.style.display = 'none';
       toolbar.style.display = 'flex';
       capture4CutEl.classList.add('is-preview');
+      
+      // Save Original Order
+      const grid = document.querySelector('.four-cut-grid');
+      originalDomOrder = Array.from(grid.children);
+
       // Ensure default preview is active
       applyPreview('sakura');
     });
@@ -268,6 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnCancelSave.addEventListener('click', () => {
       toolbar.style.display = 'none';
       initialAction.style.display = 'block';
+      restoreOriginalOrder();
       // reset captureEl but preserve layout
       capture4CutEl.className = 'capture-container ' + currentLayoutClass;
     });
@@ -316,6 +365,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Final Save
   if (btnFinalSave) {
     btnFinalSave.addEventListener('click', () => {
+      // Clear swap highlight before capturing if left active
+      if (selectedSwapNode) {
+        selectedSwapNode.classList.remove('selected-for-swap');
+        selectedSwapNode = null;
+      }
+      
       const originalText = btnFinalSave.innerText;
       btnFinalSave.innerText = "저장 중...";
       btnFinalSave.disabled = true;

@@ -57,11 +57,15 @@
 }
 
 /* 3. Vertical Layout */
-.layout-vertical .four-cut-grid {
-  grid-template-columns: 1fr;
-  max-width: 220px;
+.capture-container.layout-vertical {
+  max-width: 260px;
   margin-left: auto;
   margin-right: auto;
+  transition: max-width 0.3s ease;
+}
+.layout-vertical .four-cut-grid {
+  grid-template-columns: 1fr;
+  max-width: 100%;
 }
 
 .four-cut-card {
@@ -202,6 +206,8 @@
 
 .frame-yellow-bg {
   background-color: #fff9c4 !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='15' y='35' font-size='20' opacity='0.8'%3E🌼%3C/text%3E%3Ctext x='65' y='65' font-size='18' opacity='0.9'%3E🌼%3C/text%3E%3Ctext x='30' y='90' font-size='22' opacity='0.8'%3E🌼%3C/text%3E%3C/svg%3E") !important;
+  background-size: 120px 120px !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: none !important;
@@ -209,9 +215,23 @@
 
 .frame-skyblue-bg {
   background-color: #e1f5fe !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' opacity='0.8'%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3Ccircle cx='45' cy='25' r='15'/%3E%3Ccircle cx='60' cy='30' r='12'/%3E%3Crect x='30' y='20' width='30' height='20' rx='10'/%3E%3C/g%3E%3Cg fill='%23ffffff' opacity='0.5'%3E%3Ccircle cx='70' cy='80' r='8'/%3E%3Ccircle cx='82' cy='75' r='12'/%3E%3Ccircle cx='94' cy='80' r='9'/%3E%3Crect x='70' y='71' width='24' height='17' rx='8.5'/%3E%3C/g%3E%3C/svg%3E") !important;
+  background-size: 200px 200px !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: none !important;
+}
+
+
+
+/* Swap state */
+.selected-for-swap {
+  transform: scale(0.95);
+  outline: 3px solid var(--sys-color-primary) !important;
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  z-index: 10;
 }
 
 /* Frame Selection Swatches */

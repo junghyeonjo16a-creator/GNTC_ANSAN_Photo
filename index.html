@@ -21,8 +21,10 @@
 
     <!-- App Header -->
     <header class="app-header">
-      <h1 class="app-title" id="page-title">복음 네컷</h1>
-      <p class="app-desc" id="page-desc">네 가지 색으로 담아내는 나의 복음 이야기</p>
+      <h1 class="app-title" id="page-title" style="display:flex; justify-content:center; align-items:center; gap:8px;">
+        복음 네컷
+        <button id="btn-show-desc" style="background:var(--sys-color-primary-container); color:var(--sys-color-on-primary-container); border:none; padding:4px 8px; border-radius:12px; font-size:0.75rem; font-weight:bold; cursor:pointer;">설명?</button>
+      </h1>
     </header>
 
     <!-- SECTION 1: Gospel 4 Cut -->
@@ -80,9 +82,9 @@
         <div style="width: 100%; text-align: center;">
           <p style="margin:0 0 12px 0; font-size: 0.95rem; font-weight:600; color: var(--sys-color-primary);">1. 사진 배치 선택</p>
           <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
-            <button class="layout-btn active" id="layout-grid" style="padding: 8px 16px; border-radius: 20px; border: 1px solid var(--sys-color-primary); background: var(--sys-color-primary); color: white; font-weight: bold; font-size: 0.85rem; cursor:pointer;">2x2 격자</button>
-            <button class="layout-btn" id="layout-staggered" style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; color: #555; font-size: 0.85rem; cursor:pointer;">지그재그</button>
-            <button class="layout-btn" id="layout-vertical" style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; color: #555; font-size: 0.85rem; cursor:pointer;">세로형</button>
+            <button class="layout-btn active" id="layout-grid" style="padding: 8px 16px; border-radius: 20px; border: 1px solid var(--sys-color-primary); background: var(--sys-color-primary); color: white; font-weight: bold; font-size: 0.85rem; cursor:pointer;">1</button>
+            <button class="layout-btn" id="layout-staggered" style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; color: #555; font-size: 0.85rem; cursor:pointer;">2</button>
+            <button class="layout-btn" id="layout-vertical" style="padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; background: white; color: #555; font-size: 0.85rem; cursor:pointer;">3</button>
           </div>
         </div>
 
@@ -92,7 +94,7 @@
           <div style="display: flex; gap: 16px; justify-content: center; align-items: flex-end; flex-wrap: wrap;">
             <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
               <button class="frame-swatch" id="swatch-gntc" style="background: white; border: 2px solid #ccc; width:44px; height:44px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></button>
-              <span style="font-size:0.75rem; color:var(--sys-color-on-background);">GNTC(흰)</span>
+              <span style="font-size:0.75rem; color:var(--sys-color-on-background);">하양</span>
             </div>
             <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
               <button class="frame-swatch active" id="swatch-sakura" style="background: linear-gradient(135deg, #fbd6d6, #fab6b6); border: 2px solid #fff; width:48px; height:48px; border-radius:50%; box-shadow:0 4px 8px rgba(0,0,0,0.15);"></button>
