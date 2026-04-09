@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btnShowDesc.addEventListener('click', () => {
       openModal({
         type: 'info',
-        title: '프로그램 안내',
-        desc: '해당 프로그램의 설명입니다. (추후 내용 업데이트 예정)'
+        title: '복음 네컷 설명',
+        desc: "하나님이 만드신 만물에는 다양한 색이 조화롭게 어울려있어요! 근데, 색깔마다 의미들이 다르다는 것들 아셨나요??\n\n오늘 동물원에선 하나님이 창조하신 것들을 구역원들과 함께 보면서 추억들을 쌓아보면 좋을 것 같아요!\n\n참여방법은\n1. 동물원을 돌아다니며 해당하는 색깔과 함께 사진을 찍어주세요! 이 때, 꼭 구역원 한명 이상의 인물이 같이 나오도록 찍어주세요!\n\n2. 사진을 다 찍었으면 한번 사진을 만들어볼까요? 여러 프레임들을 선택해서 조화롭게 만들어봐요!\n\n3. 이후 다 만들어진 사진을 저장한 뒤, 제출해주시면 참여완료!"
       });
     });
   }
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function openModal(context) {
     currentSelectionContext = context;
     modalTitle.textContent = context.title;
-    modalBody.textContent = context.desc;
+    modalBody.innerHTML = context.desc.replace(/\n/g, '<br>');
     
     // Set theme class if provided
     const contentEl = document.querySelector('.modal-content');
@@ -173,7 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
       contentEl.classList.add(context.colorClass);
     }
     
-    document.getElementById('modal-actions').style.display = 'flex';
+    if (context.type === 'info') {
+      document.getElementById('modal-actions').style.display = 'none';
+    } else {
+      document.getElementById('modal-actions').style.display = 'flex';
+    }
+
     modalBody.style.display = 'block';
     
     // Reset file input so same file can trigger change event again
@@ -287,6 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     vertical: { el: document.getElementById('layout-vertical'), class: 'layout-vertical' }
   };
   let currentLayoutClass = 'layout-grid-2x2';
+  let preSaveLayoutClass = 'layout-grid-2x2';
 
   const swatches = {
     gntc: { el: document.getElementById('swatch-gntc'), class: 'frame-gntc-white' },
@@ -303,9 +309,10 @@ document.addEventListener('DOMContentLoaded', () => {
       toolbar.style.display = 'flex';
       capture4CutEl.classList.add('is-preview');
       
-      // Save Original Order
+      // Save Original Order and Layout
       const grid = document.querySelector('.four-cut-grid');
       originalDomOrder = Array.from(grid.children);
+      preSaveLayoutClass = currentLayoutClass;
 
       // Ensure default preview is active
       applyPreview('sakura');
@@ -317,9 +324,16 @@ document.addEventListener('DOMContentLoaded', () => {
       toolbar.style.display = 'none';
       initialAction.style.display = 'block';
       restoreOriginalOrder();
-      // reset captureEl but preserve layout
-      capture4CutEl.className = 'capture-container ' + currentLayoutClass;
+      
+      // reset captureEl and restore layout
+      capture4CutEl.className = 'capture-container ' + preSaveLayoutClass;
+      applyLayoutByClass(preSaveLayoutClass); // Also update buttons visually
     });
+  }
+
+  function applyLayoutByClass(className) {
+    const layoutKey = Object.keys(layoutBtns).find(key => layoutBtns[key].class === className) || 'grid';
+    applyLayout(layoutKey);
   }
 
   function applyLayout(layoutKey) {
