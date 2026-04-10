@@ -137,8 +137,38 @@
         </div>
       </div>
 
-      <div class="action-container">
-        <button class="btn-primary" id="btn-save-bingo">프레임 저장하기</button>
+      <div class="action-container" id="bingo-initial-action">
+        <button class="btn-primary" id="btn-start-save-bingo">프레임 저장하기</button>
+      </div>
+
+      <!-- Bingo Frame Selection Toolbar -->
+      <div class="action-container" id="bingo-frame-selection-toolbar" style="display:none; flex-direction:column; gap:16px;">
+        <span style="font-weight:600; font-size:1.1rem; color:var(--sys-color-primary);">프레임 꾸미기</span>
+        
+        <div>
+          <span style="font-size:0.85rem; color:var(--sys-color-on-surface-variant); display:block; margin-bottom:8px;">테마 선택</span>
+          <div style="display:flex; gap:12px; justify-content:center;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <button class="frame-swatch" id="swatch-bingo-gntc" style="background:#fff; border: 2px solid #ddd; width:44px; height:44px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></button>
+              <span style="font-size:0.75rem; color:var(--sys-color-on-background);">하얀색</span>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <button class="frame-swatch" id="swatch-bingo-sakura" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0); border: 2px solid #fff; width:44px; height:44px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></button>
+              <span style="font-size:0.75rem; color:var(--sys-color-on-background);">벚꽃</span>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <button class="frame-swatch" id="swatch-bingo-yellow" style="background: linear-gradient(135deg, #fff9c4, #fff176); border: 2px solid #fff; width:44px; height:44px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></button>
+              <span style="font-size:0.75rem; color:var(--sys-color-on-background);">노랑</span>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+              <button class="frame-swatch" id="swatch-bingo-skyblue" style="background: linear-gradient(135deg, #e1f5fe, #81d4fa); border: 2px solid #fff; width:44px; height:44px; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.1);"></button>
+              <span style="font-size:0.75rem; color:var(--sys-color-on-background);">하늘</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btn-final-save-bingo" style="width:100%; margin-top:8px;">이 프레임으로 최종 저장</button>
+        <button class="btn-secondary" id="btn-cancel-save-bingo" style="width:100%; margin-top:-8px; background:transparent; border:none; color:var(--sys-color-on-surface-variant);">취소하기</button>
       </div>
     </section>
 

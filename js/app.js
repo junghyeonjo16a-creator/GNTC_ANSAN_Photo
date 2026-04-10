@@ -24,15 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   
   const bingoDesc = [
-    "조건 없는 희생적 사랑(아가페)을 뜻하며, 모든 열매의 근간이 됩니다.\n\n\"사랑은 오래 참고 사랑은 온유하며 시기하지 아니하며...\" (고린도전서 13:4)",
-    "상황에 상관없이 하나님으로 인해 누리는 내면의 기쁨과 즐거움입니다.\n\n\"주 안에서 항상 기뻐하라 내가 다시 말하노니 기뻐하라\" (빌립보서 4:4)",
-    "하나님과의 관계 회복을 통해 얻는 평안과 이웃 간의 화목함을 뜻합니다.\n\n\"평안을 너희에게 끼치노니 곧 나의 평안을 너희에게 주노라...\" (요한복음 14:27)",
-    "고난이나 시련, 타인의 허물에 대해 조급해하지 않고 견뎌내는 인내입니다.\n\n\"모든 겸손과 온유로 하고 오래 참음으로 사랑 가운데서 서로 용납하고\" (에베소서 4:2)",
-    "타인을 향한 친절하고 너그러운 마음씨와 긍휼히 여기는 태도입니다.\n\n\"서로 친절하게 하며 불쌍히 여기며 서로 용서하기를...\" (에베소서 4:32)",
-    "선한 의지를 가지고 실질적으로 선을 행하는 도덕적 성품입니다.\n\n\"빛의 열매는 모든 착함과 의로움과 진실함에 있느니라\" (에베소서 5:9)",
-    "하나님과 사람 앞에서 변함없이 진실하고 맡은 일에 최선을 다하는 신실함입니다.\n\n\"죽도록 충성하라 그리하면 내가 생명의 관을 네게 주리라\" (요한계시록 2:10)",
-    "겸손하고 부드러운 마음으로, 강한 힘을 절제하여 남을 세워주는 성품입니다.\n\n\"나는 마음이 온유하고 겸손하니 나의 멍에를 메고 내게 배우라...\" (마태복음 11:29)",
-    "자신의 욕망과 감정을 성령의 능력으로 다스리고 조절하는 능력입니다.\n\n\"이기기를 다투는 자마다 모든 일에 절제하나니...\" (고린도전서 9:25)"
+    "조건 없는 희생적 사랑(아가페)을 뜻하며,\n모든 열매의 근간이 됩니다.\n\n\"사랑은 오래 참고 사랑은 온유하며 시기하지 아니하며...\" (고린도전서 13:4)",
+    "상황에 상관없이 하나님으로 인해 누리는\n내면의 기쁨과 즐거움입니다.\n\n\"주 안에서 항상 기뻐하라 내가 다시 말하노니 기뻐하라\" (빌립보서 4:4)",
+    "하나님과의 관계 회복을 통해 얻는\n평안과 이웃 간의 화목함을 뜻합니다.\n\n\"평안을 너희에게 끼치노니 곧 나의 평안을 너희에게 주노라...\" (요한복음 14:27)",
+    "고난이나 시련, 타인의 허물에 대해\n조급해하지 않고 견뎌내는 인내입니다.\n\n\"모든 겸손과 온유로 하고 오래 참음으로 사랑 가운데서 서로 용납하고\" (에베소서 4:2)",
+    "타인을 향한 친절하고 너그러운 마음씨와\n긍휼히 여기는 태도입니다.\n\n\"서로 친절하게 하며 불쌍히 여기며 서로 용서하기를...\" (에베소서 4:32)",
+    "선한 의지를 가지고 실질적으로\n선을 행하는 도덕적 성품입니다.\n\n\"빛의 열매는 모든 착함과 의로움과 진실함에 있느니라\" (에베소서 5:9)",
+    "하나님과 사람 앞에서 변함없이 진실하고\n맡은 일에 최선을 다하는 신실함입니다.\n\n\"죽도록 충성하라 그리하면 내가 생명의 관을 네게 주리라\" (요한계시록 2:10)",
+    "겸손하고 부드러운 마음으로,\n강한 힘을 절제하여 남을 세워주는 성품입니다.\n\n\"나는 마음이 온유하고 겸손하니 나의 멍에를 메고 내게 배우라...\" (마태복음 11:29)",
+    "자신의 욕망과 감정을 성령의 능력으로\n다스리고 조절하는 능력입니다.\n\n\"이기기를 다투는 자마다 모든 일에 절제하나니...\" (고린도전서 9:25)"
   ];
 
   let bingoState = [false, false, false, false, false, false, false, false, false];
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         openModal({
           type: 'info',
           title: '성령의 9가지 열매 빙고 설명',
-          desc: "여기에 성령의 빙고 설명이 들어갑니다. (추후 업데이트 예정)"
+          desc: "성령의 9가지 열매를 맺어봅시다!\n성령의 열매의 의미를 생각해보면서 구역원들과 함께 표현해보고 사진으로 남겨 빙고를 완성해주세요!\n\n3빙고 이상 채웠다면 통과!"
         });
       }
     });
@@ -102,6 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. Initialize Bingo Grid
   const bingoGrid = document.getElementById('bingo-grid');
+  let selectedBingoSwapNode = null;
+  let originalBingoDomOrder = [];
+
   bingoFruits.forEach((fruit, index) => {
     const item = document.createElement('div');
     item.className = 'bingo-item';
@@ -123,6 +126,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Click event for Bingo Item
     item.addEventListener('click', () => {
+      // Photo interaction during save preview (Swap Logic)
+      if (document.getElementById('capture-bingo').classList.contains('is-preview')) {
+        if (!selectedBingoSwapNode) {
+          selectedBingoSwapNode = item;
+          item.classList.add('selected-for-swap');
+        } else if (selectedBingoSwapNode === item) {
+          selectedBingoSwapNode.classList.remove('selected-for-swap');
+          selectedBingoSwapNode = null;
+        } else {
+          // Perform DOM Swap using placeholders
+          selectedBingoSwapNode.classList.remove('selected-for-swap');
+          const parent = item.parentNode;
+          const p1 = document.createElement('div');
+          const p2 = document.createElement('div');
+          parent.insertBefore(p1, item);
+          parent.insertBefore(p2, selectedBingoSwapNode);
+          parent.replaceChild(selectedBingoSwapNode, p1);
+          parent.replaceChild(item, p2);
+          selectedBingoSwapNode = null;
+        }
+        return;
+      }
+
       openModal({
         type: 'bingo',
         index: index,
@@ -431,11 +457,95 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Bingo Save
-  const btnSaveBingo = document.getElementById('btn-save-bingo');
-  if (btnSaveBingo) {
-    btnSaveBingo.addEventListener('click', () => {
-      downloadInnerElement('capture-bingo', 'fruits-bingo.png');
+  // 8. Bingo Save Flow
+  const btnStartSaveBingo = document.getElementById('btn-start-save-bingo');
+  const btnFinalSaveBingo = document.getElementById('btn-final-save-bingo');
+  const btnCancelSaveBingo = document.getElementById('btn-cancel-save-bingo');
+  const bingoInitialAction = document.getElementById('bingo-initial-action');
+  const bingoToolbar = document.getElementById('bingo-frame-selection-toolbar');
+  const captureBingoEl = document.getElementById('capture-bingo');
+
+  const bingoSwatches = {
+    gntc: { el: document.getElementById('swatch-bingo-gntc'), class: 'frame-gntc-white' },
+    sakura: { el: document.getElementById('swatch-bingo-sakura'), class: 'frame-sakura-bg' },
+    yellow: { el: document.getElementById('swatch-bingo-yellow'), class: 'frame-yellow-bg' },
+    skyblue: { el: document.getElementById('swatch-bingo-skyblue'), class: 'frame-skyblue-bg' }
+  };
+
+  function applyBingoPreview(swatchKey) {
+    Object.values(bingoSwatches).forEach(sw => {
+      if(sw.el) sw.el.classList.remove('active');
+    });
+    if(bingoSwatches[swatchKey].el) bingoSwatches[swatchKey].el.classList.add('active');
+    
+    captureBingoEl.className = 'capture-container polaroid-frame is-preview ' + bingoSwatches[swatchKey].class;
+  }
+
+  if (bingoSwatches.gntc.el) bingoSwatches.gntc.el.addEventListener('click', () => applyBingoPreview('gntc'));
+  if (bingoSwatches.sakura.el) bingoSwatches.sakura.el.addEventListener('click', () => applyBingoPreview('sakura'));
+  if (bingoSwatches.yellow.el) bingoSwatches.yellow.el.addEventListener('click', () => applyBingoPreview('yellow'));
+  if (bingoSwatches.skyblue.el) bingoSwatches.skyblue.el.addEventListener('click', () => applyBingoPreview('skyblue'));
+
+  if (btnStartSaveBingo) {
+    btnStartSaveBingo.addEventListener('click', () => {
+      bingoInitialAction.style.display = 'none';
+      bingoToolbar.style.display = 'flex';
+      captureBingoEl.classList.add('is-preview');
+      
+      // Save Original Order
+      const grid = document.getElementById('bingo-grid');
+      originalBingoDomOrder = Array.from(grid.children);
+
+      applyBingoPreview('sakura');
+    });
+  }
+
+  if (btnCancelSaveBingo) {
+    btnCancelSaveBingo.addEventListener('click', () => {
+      bingoToolbar.style.display = 'none';
+      bingoInitialAction.style.display = 'block';
+      
+      // Restore Original Order
+      if (originalBingoDomOrder.length > 0) {
+        const grid = document.getElementById('bingo-grid');
+        originalBingoDomOrder.forEach(node => grid.appendChild(node));
+      }
+      if (selectedBingoSwapNode) {
+        selectedBingoSwapNode.classList.remove('selected-for-swap');
+        selectedBingoSwapNode = null;
+      }
+
+      captureBingoEl.className = 'capture-container polaroid-frame';
+    });
+  }
+
+  if (btnFinalSaveBingo) {
+    btnFinalSaveBingo.addEventListener('click', () => {
+      // Clear swap highlight before capturing if left active
+      if (selectedBingoSwapNode) {
+        selectedBingoSwapNode.classList.remove('selected-for-swap');
+        selectedBingoSwapNode = null;
+      }
+
+      const originalText = btnFinalSaveBingo.innerText;
+      btnFinalSaveBingo.innerText = "저장 중...";
+      btnFinalSaveBingo.disabled = true;
+
+      html2canvas(captureBingoEl, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: null
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'fruits-bingo.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        
+        btnFinalSaveBingo.innerText = originalText;
+        btnFinalSaveBingo.disabled = false;
+        
+        btnCancelSaveBingo.click();
+      });
     });
   }
 
