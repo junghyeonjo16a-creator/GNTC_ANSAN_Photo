@@ -263,13 +263,12 @@
 }
 
 .bingo-item {
-  aspect-ratio: 1;
+  width: 100%;
+  padding-bottom: 100%; /* 1:1 aspect ratio hack for html2canvas */
   background-color: var(--sys-color-surface-container);
   border-radius: var(--radius-md);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
+  display: block;
   overflow: hidden;
   cursor: pointer;
   box-shadow: var(--elevation-polaroid);
@@ -288,6 +287,12 @@
   z-index: 2;
   /* subtle text shadow for better readability over images */
   text-shadow: 0 1px 3px rgba(255,255,255,0.8);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
 }
 
 .bingo-image {
