@@ -22,6 +22,19 @@ document.addEventListener('DOMContentLoaded', () => {
     "오래 참음", "자비", "양선", 
     "충성", "온유", "절제"
   ];
+  
+  const bingoDesc = [
+    "조건 없는 희생적 사랑(아가페)을 뜻하며, 모든 열매의 근간이 됩니다.\n\n\"사랑은 오래 참고 사랑은 온유하며 시기하지 아니하며...\" (고린도전서 13:4)",
+    "상황에 상관없이 하나님으로 인해 누리는 내면의 기쁨과 즐거움입니다.\n\n\"주 안에서 항상 기뻐하라 내가 다시 말하노니 기뻐하라\" (빌립보서 4:4)",
+    "하나님과의 관계 회복을 통해 얻는 평안과 이웃 간의 화목함을 뜻합니다.\n\n\"평안을 너희에게 끼치노니 곧 나의 평안을 너희에게 주노라...\" (요한복음 14:27)",
+    "고난이나 시련, 타인의 허물에 대해 조급해하지 않고 견뎌내는 인내입니다.\n\n\"모든 겸손과 온유로 하고 오래 참음으로 사랑 가운데서 서로 용납하고\" (에베소서 4:2)",
+    "타인을 향한 친절하고 너그러운 마음씨와 긍휼히 여기는 태도입니다.\n\n\"서로 친절하게 하며 불쌍히 여기며 서로 용서하기를...\" (에베소서 4:32)",
+    "선한 의지를 가지고 실질적으로 선을 행하는 도덕적 성품입니다.\n\n\"빛의 열매는 모든 착함과 의로움과 진실함에 있느니라\" (에베소서 5:9)",
+    "하나님과 사람 앞에서 변함없이 진실하고 맡은 일에 최선을 다하는 신실함입니다.\n\n\"죽도록 충성하라 그리하면 내가 생명의 관을 네게 주리라\" (요한계시록 2:10)",
+    "겸손하고 부드러운 마음으로, 강한 힘을 절제하여 남을 세워주는 성품입니다.\n\n\"나는 마음이 온유하고 겸손하니 나의 멍에를 메고 내게 배우라...\" (마태복음 11:29)",
+    "자신의 욕망과 감정을 성령의 능력으로 다스리고 조절하는 능력입니다.\n\n\"이기기를 다투는 자마다 모든 일에 절제하나니...\" (고린도전서 9:25)"
+  ];
+
   let bingoState = [false, false, false, false, false, false, false, false, false];
   
   const colorData = {
@@ -38,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       text: "'예수님의 보혈을 의미합니다'\n\n그럼에도 하나님은 우리를 여전히 사랑하셔서\n예수님을 이 땅에 보내주셨습니다.\n예수님은 십자가에서 우리 죄를 대신해 죽으시고,\n피를 흘리심으로 우리의 죄를 사해주셨습니다.\n\n\"하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니\n이는 저를 믿는 자마다 멸망치 않고 영생을 얻게 하려 하심이니라\" [요한복음 3장 16절]" 
     },
     white: { 
-      title: "하양색", 
+      title: "하얀색", 
       text: "'예수님의 부활과 우리가 얻게 되는 새 생명, 천국을 의미합니다'\n\n예수님은 죽음을 이기시고 다시 살아나셨습니다.\n예수님을 믿는 사람은 죄에서 깨끗해지고,\n새로운 생명, 즉 영생을 얻습니다.\n\n그 후에 살아남은 자도 저희와 함께 구름 속으로 끌어올려\n공중에서 주를 영접하게 하시리니 그리하여 우리가 항상 주와 함께\n있으리라 [데살로니가전서 4장 17절 말씀]" 
     }
   };
@@ -47,11 +60,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnShowDesc = document.getElementById('btn-show-desc');
   if (btnShowDesc) {
     btnShowDesc.addEventListener('click', () => {
-      openModal({
-        type: 'info',
-        title: '복음 네컷 설명',
-        desc: "하나님이 만드신 만물에는 다양한 색이 조화롭게 어울려있어요! 근데, 색깔마다 의미들이 다르다는 것들 아셨나요??\n\n오늘 동물원에선 하나님이 창조하신 것들을 구역원들과 함께 보면서 추억들을 쌓아보면 좋을 것 같아요!\n\n참여방법은\n1. 동물원을 돌아다니며 해당하는 색깔과 함께 사진을 찍어주세요! 이 때, 꼭 구역원 한명 이상의 인물이 같이 나오도록 찍어주세요!\n\n2. 사진을 다 찍었으면 한번 사진을 만들어볼까요? 여러 프레임들을 선택해서 조화롭게 만들어봐요!\n\n3. 이후 다 만들어진 사진을 저장한 뒤, 제출해주시면 참여완료!"
-      });
+      if (tab4Cut.classList.contains('active')) {
+        openModal({
+          type: 'info',
+          title: '복음 네컷 설명',
+          desc: "하나님이 만드신 만물에는 다양한 색이 조화롭게 어울려있어요! 근데, 색깔마다 의미들이 다르다는 것들 아셨나요??\n\n오늘 동물원에선 하나님이 창조하신 것들을 구역원들과 함께 보면서 추억들을 쌓아보면 좋을 것 같아요!\n\n참여방법은\n1. 동물원을 돌아다니며 해당하는 색깔과 함께 사진을 찍어주세요! 이 때, 꼭 구역원 한명 이상의 인물이 같이 나오도록 찍어주세요!\n(이 때, 일상에서 말고 동물원에서 볼 수 있는 색깔들로 찍어주세요 ~:) )\n\n2. 사진을 다 찍었으면 한번 사진을 만들어볼까요? 여러 프레임들을 선택해서 조화롭게 만들어봐요!\n\n3. 이후 다 만들어진 사진을 저장한 뒤, 제출해주시면 참여완료!"
+        });
+      } else {
+        openModal({
+          type: 'info',
+          title: '성령의 9가지 열매 빙고 설명',
+          desc: "여기에 성령의 빙고 설명이 들어갑니다. (추후 업데이트 예정)"
+        });
+      }
     });
   }
 
@@ -63,7 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
     secBingo.classList.remove('active');
     
     pageTitle.textContent = "복음 네컷";
-    pageDesc.textContent = "네 가지 색으로 담아내는 나의 복음 이야기";
+    if(pageDesc) pageDesc.textContent = "네 가지 색으로 담아내는 나의 복음 이야기";
+    if(btnShowDesc) btnShowDesc.style.display = 'block';
   });
 
   tabBingo.addEventListener('click', (e) => {
@@ -73,8 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
     secBingo.classList.add('active');
     sec4Cut.classList.remove('active');
     
-    pageTitle.textContent = "성령의 빙고";
-    pageDesc.textContent = "내 삶에 맺히는 성령의 9가지 열매";
+    pageTitle.textContent = "성령의 9가지 열매 빙고";
+    if(pageDesc) pageDesc.textContent = "내 삶에 맺히는 성령의 9가지 열매";
+    if(btnShowDesc) btnShowDesc.style.display = 'block';
   });
 
   // 2. Initialize Bingo Grid
@@ -103,8 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
       openModal({
         type: 'bingo',
         index: index,
-        title: `${fruit}의 열매`,
-        desc: `[${fruit} 열매의 성경적 의미]`
+        title: `${fruit}`,
+        desc: `<div style="text-align: center;">${bingoDesc[index]}</div>`
       });
     });
   });

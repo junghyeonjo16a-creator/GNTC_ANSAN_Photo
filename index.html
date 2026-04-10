@@ -16,15 +16,17 @@
     <!-- Navigation (Sticky Glass Header) -->
     <nav class="nav-glass">
       <a href="#" class="nav-item active" id="tab-4cut">복음 네컷</a>
-      <a href="#" class="nav-item" id="tab-bingo">열매 인증</a>
+      <a href="#" class="nav-item" id="tab-bingo">열매 빙고</a>
     </nav>
 
     <!-- App Header -->
     <header class="app-header">
-      <h1 class="app-title" id="page-title" style="display:flex; justify-content:center; align-items:center; gap:8px;">
-        복음 네컷
-        <button id="btn-show-desc" style="background:#e1f5fe; color:#0277bd; border:none; padding:4px 8px; border-radius:12px; font-size:0.75rem; font-weight:bold; cursor:pointer;">설명?</button>
+      <h1 class="app-title" style="display:flex; justify-content:center; align-items:center; gap:8px;">
+        <span id="page-title">복음 네컷</span>
+        <button id="btn-show-desc" style="background:#e1f5fe; color:#0277bd; border:none; padding:4px 8px; border-radius:12px; font-size:0.75rem; font-weight:bold; cursor:pointer;">설명</button>
       </h1>
+      <!-- Hidden description to prevent JS errors when switching tabs -->
+      <p class="app-desc" id="page-desc" style="display:none;"></p>
     </header>
 
     <!-- SECTION 1: Gospel 4 Cut -->
@@ -53,7 +55,7 @@
               <span class="upload-icon">📷<br>사진 올리기</span>
               <img src="" alt="" class="four-cut-image" id="fc-img-2">
             </div>
-            <div class="four-cut-label">하양색</div>
+            <div class="four-cut-label">하얀색</div>
           </div>
           <!-- Item 4: Green (Growth) -->
           <div class="four-cut-card theme-green" data-color="green" data-index="3">
